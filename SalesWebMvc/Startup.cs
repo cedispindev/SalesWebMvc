@@ -45,14 +45,19 @@ namespace SalesWebMvc
 
             /*----- SalesWebMvcContext ---- tem do nome das classe que esta na pasta Data ----- */
             /*----- SalesWebMvc ---- vem do nome do projeto ----- */
+
+            services.AddScoped<SeedingService>(); //Registra o nosso serviço na injeção de dependencia da aplicação
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, SeedingService seedingService)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                seedingService.Seed();
             }
             else
             {
